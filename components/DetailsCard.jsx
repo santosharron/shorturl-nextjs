@@ -1,5 +1,9 @@
-import Swal from 'sweetalert2';
+import { toast } from 'sonner';
 import QRCode from "qrcode.react";
+import { Card, CardContent, CardFooter } from '@/components/ui/card'; // Adjust import path as necessary
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 
 export default function DetailsCard({ longURL, unique }) {
     const shortenedURL = `${typeof window !== 'undefined' ? window.location.origin : ''}/${unique}`;
@@ -10,57 +14,55 @@ export default function DetailsCard({ longURL, unique }) {
         document.execCommand('copy');
         inputField.setSelectionRange(0, 0);
 
-        Swal.fire({
-            icon: 'success',
-            title: 'Copied to clipboard',
-            showConfirmButton: false,
-            timer: 1500
+        toast.success('Copied to clipboard', {
+            duration: 1500,
+            action: {
+                label: 'Undo',
+                onClick: () => console.log('Undo clicked')
+            }
         });
     }
 
     return (
         <section className="flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-md md:w-4/6 mb-12">
-            {/* <h2 className="text-2xl font-bold mb-4 text-gray-700">Details</h2> */}
-            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
-                <span class="font-medium">Success</span> Cut-Off your long URL!
+    <Card className="w-full md:w-4/6 mb-12">
+        <CardContent>
+            <div className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+                <span className="font-medium">Success</span> Cut-Off your long URL!
             </div>
+
             <div className="mb-4">
-                <label className="block text-l text-gray-700 text-sm font-bold mb-2" htmlFor="longURL">
-                Long URL
-                </label>
-                <input
-                    className="appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                <Label htmlFor="longURL">Long URL</Label>
+                <Input
                     id="longURL"
                     type="text"
                     value={longURL}
                     readOnly
+                    className="mt-1"
                 />
             </div>
+
             <div className="mb-4">
-                <label className="block text-l text-gray-700 text-sm font-bold mb-2" htmlFor="shortURL">
-                    Shortened URL
-                </label>
+                <Label htmlFor="shortURL">Shortened URL</Label>
                 <div className="flex items-center">
-                    <input
-                    className="appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="shortURL"
-                    type="text"
-                    value={shortenedURL}
-                    readOnly
+                    <Input
+                        id="shortURL"
+                        type="text"
+                        value={shortenedURL}
+                        readOnly
+                        className="mt-1"
                     />
-                    <button
-                    className="bg-blue-600 hover:bg-blue-700 text-white rounded px-3 py-3 ml-2"
-                    onClick={copyToClipboard}
+                    <Button 
+                        className="text-white rounded px-3 py-3 ml-2" 
+                        onClick={copyToClipboard}
                     >
-                    Copy
-                    </button>
+                        Copy
+                    </Button>
                 </div>
             </div>
+
             <div className="mb-4">
-                <label className="block text-l text-gray-700 text-sm font-bold mb-2" htmlFor="longURL">
-                QR Code
-                </label>
+                <Label htmlFor="qr-gen">QR Code</Label>
                 <QRCode 
                     id="qr-gen"
                     value={shortenedURL} 
@@ -69,16 +71,19 @@ export default function DetailsCard({ longURL, unique }) {
                     includeMargin={true}
                 />
             </div>
-            <div className="flex items-center justify-between mt-4">
-                <a
-                    href="../../"
-                    className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit"
-                >
+        </CardContent>
+
+        <CardFooter className="flex items-center justify-between mt-4">
+            <a
+                href="../../"
+                className="bg-black hover:bg-gray-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit"
+            >
                 Shorten another Long URL
-                </a>
-            </div>
-        </div>
-    </section>
+            </a>
+        </CardFooter>
+    </Card>
+</section>
+
     )
 }
