@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Welcome to the Project Name repository! This project is designed to [brief description of what your project does]. The goal of this project is to [briefly describe the goal or purpose of the project].
+This repository is a URL Shortener to shorten long URLs like [bit.ly](https://bitly.com/) and similar. Built using [Next.js](https://nextjs.org/) and [MongoDB](https://mongodb.com) as database and secured with [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/).
 
 ## Demo
 
@@ -10,11 +10,12 @@ To get a quick overview of how the project works, check out the demo below:
 
 ![Project Demo](intro.gif)
 
-## Features
-
-- **Feature 1:** Description of feature 1.
-- **Feature 2:** Description of feature 2.
-- **Feature 3:** Description of feature 3.
+## Tech Stack
+This project was built using these technologies.
+- [Next.js](https://nextjs.org/)
+- [MongoDB](https://mongodb.com)
+- [TailwindCSS](https://tailwindcss.com)
+- [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/)
 
 ## Installation
 
@@ -23,45 +24,34 @@ To get started with this project, follow the instructions below to set up your d
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/projectname.git
+   git clone https://github.com/santosharron/shorturl-nextjs.git
    ```
-
-2. **Navigate into the project directory:**
-
-   ```bash
-   cd projectname
-   ```
-
-3. **Install dependencies:**
+   
+2. **Install dependencies:**
 
    ```bash
    npm install
    ```
+3. **Setup `.env`**
+    ```bash
+    MONGODB_URL = "MONGODB_URL"
+    NEXT_PUBLIC_SITE_KEY = "CF_TURNSTILE_SITE_KEY"
+    SECRET_KEY = "CF_TURNSTILE_SECRET_KEY"
+    ```
 
 4. **Start the application:**
 
    ```bash
-   npm start
+   npm run dev
    ```
+Web will run on localhost:3000 by default at development mode.
 
-## Usage
-
-Provide examples of how to use the project or application. This could include command-line options, configuration settings, or example code.
-
-## Contributing
-
-If you would like to contribute to this project, please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/YourFeature`).
-3. Commit your changes (`git commit -am 'Add new feature'`).
-4. Push to the branch (`git push origin feature/YourFeature`).
-5. Create a new Pull Request.
+> **Note:** Be sure to use Test keys for Cloudflare when running the project in development.
+```bash
+NEXT_PUBLIC_SITE_KEY = "1x00000000000000000000AA"
+SECRET_KEY = "1x0000000000000000000000000000000AA"
+```
 
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-
-## Contact
-
-For any questions or feedback, feel free to contact me at [your email address] or create an issue in the repository.
